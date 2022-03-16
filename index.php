@@ -4,6 +4,7 @@
     require_once __DIR__ . "/classes/cibo.php";
     require_once __DIR__ . "/classes/cuccia.php";
     require_once __DIR__ . "/classes/gioco.php";
+    require_once __DIR__ . "/classes/antipulce.php";
     require_once __DIR__ . "/classes/utenteRegistrato.php";
 
     //array che conterrà tutti gli utenti presenti
@@ -51,6 +52,11 @@
             echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} NON può comprare </h1>";
         }
     }
+
+    
+    $antipulce = new antipulce(20, "qualsiasi");
+
+    var_dump($antipulce);
 
 
 ?>
