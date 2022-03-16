@@ -6,11 +6,22 @@
     require_once __DIR__ . "/classes/gioco.php";
     require_once __DIR__ . "/classes/utenteRegistrato.php";
 
+    //array che conterrà tutti gli utenti presenti
+    $listaUtenti=[];
+
     //utente user generico, non registrato e quindi con sconto a 0
-    $utenteNonRegistrato = new user("Marco", "Rossi", "Marco@prova.it", "12345", "gennaio 2025");
+    $utenteNonRegistrato = new user("Marco", "Rossi", "Marco@prova.it", "12345", 2025);
 
     //utente registrato, che estende l'utente normale ma settando lo sconto in fase di construct
-    $utenteRegistrato = new utenteRegistrato("Pippo", "Bianchi", "Pippo@bianchi.it", "12345", "marzo 2024");
+    $utenteRegistrato = new utenteRegistrato("Pippo", "Bianchi", "Pippo@bianchi.it", "12345", 2020);
+
+    $listaUtenti[] = $utenteNonRegistrato;
+    $listaUtenti[] = $utenteRegistrato;
+
+    //scorro all'interno dell'array, e controllo l'anno di scadenza di ogni utente
+    foreach ($listaUtenti as $utente){
+        ControllaScadenzaCarta($utente);
+    }
 
 
     var_dump($utenteNonRegistrato);
@@ -31,6 +42,15 @@
     //classe gioco che estende product, che specifica la tipologia
     $giocoGatto = new gioco(30, "gatto", "palla");
     var_dump($giocoGatto);
+
+
+    function ControllaScadenzaCarta($utente){
+        if(date("Y") < $utente->cartaDiCredito->getAnnoScadenza()){
+            echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} può comprare </h1>";
+        }else{
+            echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} NON può comprare </h1>";
+        }
+    }
 
 
 ?>

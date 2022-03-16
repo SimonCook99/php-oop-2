@@ -3,11 +3,11 @@
     class cartaDiCredito{
         private $numeroCarta;
 
-        private $dataScadenza;
+        private $annoScadenza;
 
-        /* public function __construct($numeroCarta, $dataScadenza){
+        /* public function __construct($numeroCarta, $annoScadenza){
             $this->numeroCarta = $numeroCarta;
-            $this->dataScadenza = $dataScadenza;
+            $this->annoScadenza = $annoScadenza;
             
         } */
 
@@ -15,8 +15,12 @@
             $this->numeroCarta = $numeroCarta;
         }
 
-        public function setScadenzaCarta($dataScadenza){
-            $this->dataScadenza = $dataScadenza;
+        public function setScadenzaCarta($annoScadenza){
+            $this->annoScadenza = $annoScadenza;
+        }
+
+        public function getAnnoScadenza(){
+            return $this->annoScadenza;
         }
 
     }

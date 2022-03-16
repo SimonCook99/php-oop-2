@@ -7,17 +7,17 @@
         protected $nome;
         protected $cognome;
         protected $mail;
-        protected $sconto = 0;
-        protected $cartaDiCredito;
+        public $sconto = 0;
+        public $cartaDiCredito;
 
-        public function __construct($nome, $cognome, $mail, $numeroCarta, $dataScadenza){
+        public function __construct($nome, $cognome, $mail, $numeroCarta, $annoScadenza){
             $this->nome = $nome;
             $this->cognome = $cognome;
             $this->mail = $mail;
 
             $this->cartaDiCredito = new cartaDiCredito();
             $this->cartaDiCredito->setNumeroCarta($numeroCarta);
-            $this->cartaDiCredito->setScadenzaCarta($dataScadenza);
+            $this->cartaDiCredito->setScadenzaCarta($annoScadenza);
 
         }
 
@@ -26,6 +26,14 @@
             if(is_numeric($sconto)){
                 $this->sconto = $sconto;
             } 
+        }
+
+        public function getNome(){
+            return $this->nome;
+        }
+
+        public function getCognome(){
+            return $this->cognome;
         }
 
     }
