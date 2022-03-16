@@ -53,7 +53,7 @@
         }
     }
 
-    
+    //provo ad aggiungere il prodotto antipulce, e il costruttore della classe verificherà la disponibilità dell'articolo in base al mese corrente
     $antipulce = new antipulce(20, "qualsiasi");
 
     var_dump($antipulce);

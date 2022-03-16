@@ -8,9 +8,10 @@
 
         public function __construct($prezzo, $animaleTarget, $grammi="ND"){
             
-            if(date("m") >=1 && date("m")<=4){
+            //disponibilità SOLO da maggio ad agosto (dal mese 5 al mese 8)
+            if(date("m") >=5 && date("m")<=8){
                 parent::__construct($prezzo, $animaleTarget);
-                $this->grammi=$grammi;
+                $this->$grammi=$grammi;
             }else{
                 echo "<h1>Spiacente, questo prodotto non è attualmente disponibile</h1>";
             }
