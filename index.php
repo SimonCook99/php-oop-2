@@ -14,10 +14,14 @@
     $utenteNonRegistrato = new user("Marco", "Rossi", "Marco@prova.it", "12345", 2025);
 
     //utente registrato, che estende l'utente normale ma settando lo sconto in fase di construct
-    $utenteRegistrato = new utenteRegistrato("Pippo", "Bianchi", "Pippo@bianchi.it", "12345", 2020);
+    $utenteRegistrato = new utenteRegistrato("Pippo", "Bianchi", "Pippo@bianchi.it", "5678", 2020);
+
+    $utenteCheHaInseritoMaleLaCarta = new user("Tizio", "distratto", "tiziodistratto@prova.it", "4124", "asdfsdgsd");
 
     $listaUtenti[] = $utenteNonRegistrato;
     $listaUtenti[] = $utenteRegistrato;
+
+    $listaUtenti[] = $utenteCheHaInseritoMaleLaCarta;
 
     //scorro all'interno dell'array, e controllo l'anno di scadenza di ogni utente
     foreach ($listaUtenti as $utente){
@@ -46,17 +50,38 @@
 
 
     function ControllaScadenzaCarta($utente){
-        if(date("Y") < $utente->cartaDiCredito->getAnnoScadenza()){
-            echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} può comprare </h1>";
-        }else{
-            echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} NON può comprare </h1>";
+
+        try{
+
+            //Se l'anno di scadenza non è un numero lancio un'eccezione, altrimenti continuo la logica
+            if(!is_numeric($utente->cartaDiCredito->getAnnoScadenza())){
+                throw new Exception("Anno inserito non valido");
+            }else{
+                if(date("Y") < $utente->cartaDiCredito->getAnnoScadenza()){
+                    echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} può comprare </h1>";
+                }else{
+                    echo "<h1>L'utente {$utente->getNome()} {$utente->getCognome()} NON può comprare </h1>";
+                }
+            }
+        }catch(Exception $e){
+            if(!is_numeric($utente->cartaDiCredito->getAnnoScadenza())){
+                echo $e->getMessage();
+            }
         }
     }
 
-    //provo ad aggiungere il prodotto antipulce, e il costruttore della classe verificherà la disponibilità dell'articolo in base al mese corrente
-    $antipulce = new antipulce(20, "qualsiasi");
 
-    var_dump($antipulce);
+    //faccio il try della creazione dell'oggetto, per verificarne la disponibilità
+    try{
+        //provo ad aggiungere il prodotto antipulce, e il costruttore della classe verificherà la disponibilità dell'articolo in base al mese corrente
+        $antipulce = new antipulce(20, "qualsiasi");
+        var_dump($antipulce);
+    }catch (Exception $e){
+        echo $e->getMessage();
+    }
+    
+
+    
 
 
 ?>

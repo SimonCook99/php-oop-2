@@ -5,13 +5,9 @@
         protected $animaleTarget;
 
         public function __construct($prezzo, $animaleTarget){
-            if(is_numeric($prezzo)){
-                $this->prezzo = $prezzo;
-            }
+            $this->setPrezzo($prezzo);
 
-            if(is_string($animaleTarget)){
-                $this->animaleTarget = $animaleTarget;
-            }
+            $this->setAnimale($animaleTarget);
         }
 
         public function getPrezzo(){
